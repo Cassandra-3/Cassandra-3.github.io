@@ -528,6 +528,8 @@ html[data-theme="light"] .theme-icon-moon { opacity: 1; transform: scale(1) rota
 .experience-card details > summary { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(280px, 1.2fr) auto; gap: 30px; align-items: center; padding: 26px; list-style: none; cursor: pointer; }
 .experience-card summary::-webkit-details-marker { display: none; }
 .experience-card summary::marker { content: ""; }
+.experience-card details[open] .expand-icon { background: var(--violet-soft); transform: rotate(180deg); }
+.experience-card details[open] .expand-icon::after { transform: translate(-50%, -50%) rotate(0deg); }
 .experience-card h3 { margin: 0 0 5px; font-size: 1.15rem; letter-spacing: -0.025em; }
 .experience-setting { margin: 0; color: var(--muted); font-size: 12px; }
 .experience-summary { margin: 0; color: var(--muted-strong); font-size: 13px; }
