@@ -282,6 +282,16 @@ window.PORTFOLIO_DATA = {
     { title: "Follow through", text: "Document issues, retest fixes, escalate when needed, and keep stakeholders informed." }
   ],
 
+  personality: {
+    statement: "I like being the person who can bring structure to a messy problem and make the next step feel manageable.",
+    traits: [
+      { title: "Clear communicator", text: "I make technical steps understandable, from first-time sign-in and remote access to security findings and executive reports." },
+      { title: "Thorough by habit", text: "I notice missing evidence, document defects clearly, and retest fixes instead of treating the first pass as the finish line." },
+      { title: "Collaborative", text: "I coordinate reviews, integrate team findings, and support junior work with a focus on clarity and shared progress." },
+      { title: "Calm problem-solver", text: "I stay practical across devices, accounts, networking, and vendor escalation, focusing on the next useful action." }
+    ]
+  },
+
   skills: [
     { area: "Governance, risk & compliance", proof: "Framework maps, risk plans, policy work, evidence coordination", projects: ["secure-architecture", "risk-plan", "policy-integration"] },
     { area: "Incident response", proof: "Lifecycle design, escalation logic, evidence handling, communications", projects: ["box-ir", "policy-integration", "szechuan-forensics"] },

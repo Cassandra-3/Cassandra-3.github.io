@@ -274,6 +274,25 @@
     });
   }
 
+  function renderPersonality() {
+    $('[data-personality]').innerHTML = `
+      <blockquote class="personality-quote">
+        <span aria-hidden="true">“</span>
+        <p>${escapeHtml(data.personality.statement)}</p>
+        <footer>— Cassandra</footer>
+      </blockquote>
+      <div class="personality-grid">
+        ${data.personality.traits.map((trait, index) => `
+          <article>
+            <span>${String(index + 1).padStart(2, '0')}</span>
+            <h3>${escapeHtml(trait.title)}</h3>
+            <p>${escapeHtml(trait.text)}</p>
+          </article>
+        `).join('')}
+      </div>
+    `;
+  }
+
   function renderPlanned() {
     $('[data-planned-grid]').innerHTML = planned.map((project, index) => `
       <article class="planned-card reveal">
@@ -390,6 +409,7 @@
   renderExperience();
   renderWorkPrinciples();
   renderSkills();
+  renderPersonality();
   renderPlanned();
   setupProjectControls();
   setupTheme();
