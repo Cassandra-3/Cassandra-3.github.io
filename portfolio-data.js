@@ -222,6 +222,7 @@ window.PORTFOLIO_DATA = {
       setting: "Cybersecurity technology company",
       label: "Professional experience · anonymized",
       summary: "Documentation, audit evidence, vendor risk, compliance-platform testing, and quality review at the intersection of security and operations.",
+      signals: ["Policy lifecycle", "Québec Law 25 evidence", "Vendor risk", "Platform QA"],
       details: [
         "Authored and maintained policies.",
         "Collected and organized Québec Law 25 self-assessment evidence, identified missing documentation, and coordinated evidence review and approval.",
@@ -236,6 +237,7 @@ window.PORTFOLIO_DATA = {
       setting: "Global technology-services environment",
       label: "Professional experience · anonymized",
       summary: "Identity-aware support, remote access, sign-in guidance, and troubleshooting delivered with clear communication.",
+      signals: ["Identity verification", "Approved access", "RSA support", "Remote access"],
       details: [
         "Verified users before modifying approved access rights.",
         "Supported RSA-based temporary access.",
@@ -250,6 +252,7 @@ window.PORTFOLIO_DATA = {
       setting: "Confidential consumer-technology account",
       label: "Professional experience · anonymized",
       summary: "Front-line technical support across devices, software, connectivity, and accounts.",
+      signals: ["Device support", "Software", "Connectivity", "Accounts", "90%+ satisfaction"],
       details: [
         "Served as the first point of contact for troubleshooting.",
         "Supported device, software, connectivity, and account issues.",
@@ -262,6 +265,7 @@ window.PORTFOLIO_DATA = {
       setting: "Local clients · active since May 2023",
       label: "Community support · compensated in kind",
       summary: "Practical, relationship-based technology help for approximately five or six recurring local clients.",
+      signals: ["Migrations", "Networking", "AV equipment", "Cross-platform support", "Vendor escalation"],
       details: [
         "Supported laptops, mobile devices, migrations, networking, and audiovisual equipment.",
         "Worked across Android and Apple devices, accounts, and applications.",
@@ -269,6 +273,13 @@ window.PORTFOLIO_DATA = {
       ],
       note: "This is informal and occasional support, not represented as self-employment."
     }
+  ],
+
+  workPrinciples: [
+    { title: "Evidence that moves", text: "Organize requirements, surface gaps, and coordinate review so evidence is ready for decisions." },
+    { title: "Access with care", text: "Verify identity and authorization before supporting approved access changes." },
+    { title: "Explain the path", text: "Turn technical steps into clear guidance for sign-in, remote access, devices, software, and connectivity." },
+    { title: "Follow through", text: "Document issues, retest fixes, escalate when needed, and keep stakeholders informed." }
   ],
 
   skills: [

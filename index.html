@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://cassandra-3.github.io/">
   <title>Cassandra Dsouza — Cybersecurity, GRC & IT Operations</title>
   <link rel="canonical" href="https://cassandra-3.github.io/">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
   <script>
     (function () {
       try {
@@ -36,8 +36,8 @@
     </button>
 
     <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation" data-nav>
-      <a href="#projects">Case studies</a>
       <a href="#experience">Experience</a>
+      <a href="#projects">Case studies</a>
       <a href="#evidence">Evidence map</a>
       <a href="#about">About</a>
     </nav>
@@ -52,10 +52,10 @@
     <section class="hero section-shell" id="top" aria-labelledby="hero-title">
       <div class="hero-copy reveal">
         <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> Cybersecurity · GRC · IT operations</p>
-        <h1 id="hero-title">Security,<br><span>made legible.</span></h1>
+        <h1 id="hero-title">Security,<br><span>made clear.</span></h1>
         <p class="hero-intro">I turn requirements, technical evidence, and operational needs into clear decisions, practical documentation, and support people can use.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#projects">Explore the evidence <span aria-hidden="true">↓</span></a>
+          <a class="button button-primary" href="#experience">Explore my experience <span aria-hidden="true">↓</span></a>
           <a class="button button-ghost" href="https://www.linkedin.com/in/cassandradsouza54a784168/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> opens in a new tab</span></a>
           <a class="text-link" href="https://github.com/Cassandra-3" target="_blank" rel="noreferrer">GitHub profile <span aria-hidden="true">↗</span><span class="sr-only"> opens in a new tab</span></a>
         </div>
@@ -77,21 +77,33 @@
       <div class="fact-strip reveal" id="fact-strip" aria-label="Portfolio facts"></div>
     </section>
 
+    <section class="experience-section section-shell" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow">01 / Professional practice</p>
+          <h2 id="experience-title">Experience in practice.</h2>
+        </div>
+        <p>Hands-on work across GRC, enterprise service delivery, consumer technology support, and practical local troubleshooting.</p>
+      </div>
+      <div class="timeline" data-experience></div>
+      <div class="work-principles reveal" data-work-principles></div>
+    </section>
+
     <section class="project-section section-shell" id="projects" aria-labelledby="projects-title">
       <div class="section-heading reveal">
         <div>
-          <p class="eyebrow">01 / Case-study library</p>
+          <p class="eyebrow">02 / Case-study library</p>
           <h2 id="projects-title">Follow the signal.</h2>
         </div>
-        <p>Filter by practice area, then open a card for the contribution, artifacts, tools, and scope boundary. Planned work remains visibly separate from completed evidence.</p>
+        <p>Choose completed or planned work, filter by practice area, then open any case study to see the contribution, artifacts, tools, and scope.</p>
       </div>
 
       <div class="filter-wrap reveal" aria-label="Filter case studies by practice area">
         <div class="filters" role="toolbar" aria-label="Project filters" data-filters></div>
-        <button class="status-toggle" type="button" aria-pressed="false" data-planned-toggle>
-          <span class="status-toggle-dot" aria-hidden="true"></span>
-          Include planned work
-        </button>
+        <div class="status-switch" role="group" aria-label="Choose completed or planned projects">
+          <button class="status-button" type="button" aria-pressed="true" data-status-filter="published">Completed <span data-status-count="published">10</span></button>
+          <button class="status-button" type="button" aria-pressed="false" data-status-filter="planned">Planned <span data-status-count="planned">3</span></button>
+        </div>
       </div>
 
       <div class="results-meta reveal">
@@ -106,10 +118,10 @@
       <div class="section-shell">
         <div class="section-heading reveal">
           <div>
-            <p class="eyebrow">02 / Evidence map</p>
-            <h2 id="evidence-title">Counts, not confidence theatre.</h2>
+            <p class="eyebrow">03 / Evidence map</p>
+            <h2 id="evidence-title">Evidence you can trace.</h2>
           </div>
-          <p>These visuals count published case studies and documented domains. They do not turn skills into subjective percentages.</p>
+          <p>These visuals count published case studies and documented practice areas, showing the breadth of the portfolio and where the strongest bodies of evidence sit.</p>
         </div>
 
         <div class="chart-grid">
@@ -123,25 +135,14 @@
 
           <article class="chart-card status-card reveal" aria-labelledby="status-chart-title">
             <div class="chart-card-heading">
-              <div><p class="chart-kicker">Portfolio status</p><h3 id="status-chart-title">Published vs. planned</h3></div>
-              <span class="chart-unit">clearly separated</span>
+              <div><p class="chart-kicker">Portfolio status</p><h3 id="status-chart-title">Work status</h3></div>
+              <span class="chart-unit">completed + upcoming</span>
             </div>
             <div class="status-chart" data-status-chart></div>
           </article>
         </div>
         <p class="chart-note reveal">A case study may support more than one domain, so domain counts are intentionally non-exclusive.</p>
       </div>
-    </section>
-
-    <section class="experience-section section-shell" id="experience" aria-labelledby="experience-title">
-      <div class="section-heading reveal">
-        <div>
-          <p class="eyebrow">03 / Professional practice</p>
-          <h2 id="experience-title">Experience, anonymized by design.</h2>
-        </div>
-        <p>Enough detail to understand the work; no employer or confidential client names, proprietary screenshots, internal metrics, or private records.</p>
-      </div>
-      <div class="timeline" data-experience></div>
     </section>
 
     <section class="skills-section" id="skills" aria-labelledby="skills-title">
@@ -163,9 +164,9 @@
       <div class="section-heading reveal">
         <div>
           <p class="eyebrow">05 / Next investigations</p>
-          <h2 id="planned-title">Planned means planned.</h2>
+          <h2 id="planned-title">What's next.</h2>
         </div>
-        <p>These projects are a public learning roadmap, not finished experience. Each stays outside demonstrated-skills claims until implementation evidence is published.</p>
+        <p>Three focused builds extend the portfolio into production-style monitoring and business intelligence. Each will gain a full case study as it is completed.</p>
       </div>
       <div class="planned-grid" data-planned-grid></div>
     </section>
@@ -174,17 +175,17 @@
       <div class="section-shell about-grid">
         <div class="about-copy reveal">
           <p class="eyebrow">06 / Working principles</p>
-          <h2 id="about-title">Clear claims. Useful controls. Human support.</h2>
-          <p>Cassandra's work sits where security, technology, documentation, and stakeholder support overlap: translating requirements into usable controls, investigating evidence, improving operational processes, and helping people solve technology problems.</p>
+          <h2 id="about-title">Practical security, thoughtfully delivered.</h2>
+          <p>Cassandra works where security, technology, documentation, and stakeholder support overlap: translating requirements into usable controls, investigating evidence, improving operational processes, and helping people solve technology problems.</p>
           <div class="about-actions">
             <a class="button button-primary" href="https://github.com/Cassandra-3/cassandras-portfolio" target="_blank" rel="noreferrer">View the source portfolio <span aria-hidden="true">↗</span><span class="sr-only"> opens in a new tab</span></a>
             <a class="button button-ghost" href="https://www.linkedin.com/in/cassandradsouza54a784168/" target="_blank" rel="noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> opens in a new tab</span></a>
           </div>
         </div>
         <div class="principle-stack reveal" aria-label="Evidence standards">
-          <article><span>01</span><div><h3>Name the context</h3><p>Professional, academic, team, individual, and planned work are never blended together.</p></div></article>
-          <article><span>02</span><div><h3>Show the boundary</h3><p>Recommendations are not described as deployments; alerts are not treated as conclusions.</p></div></article>
-          <article><span>03</span><div><h3>Protect the people</h3><p>Employer, client, and private information stays out of the public portfolio.</p></div></article>
+          <article><span>01</span><div><h3>Context builds confidence</h3><p>Professional, academic, team, individual, and upcoming work each have a clear place.</p></div></article>
+          <article><span>02</span><div><h3>Evidence leads the story</h3><p>Every capability connects to public code, reports, workflows, diagrams, or documented analysis.</p></div></article>
+          <article><span>03</span><div><h3>Communication matters</h3><p>Technical findings become practical decisions, useful documentation, and support people can act on.</p></div></article>
         </div>
       </div>
     </section>
@@ -198,11 +199,11 @@
         <a href="https://www.linkedin.com/in/cassandradsouza54a784168/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> opens in a new tab</span></a>
         <a href="#top">Back to top ↑</a>
       </div>
-      <p class="footer-note">Built as an evidence-first portfolio. No trackers, no contact data, no confidential artifacts.</p>
+      <p class="footer-note">Evidence-first portfolio · public GitHub case studies · accessible by design.</p>
     </div>
   </footer>
 
-  <script src="portfolio-data.js?v=3"></script>
-  <script src="script.js?v=3"></script>
+  <script src="portfolio-data.js?v=4"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

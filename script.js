@@ -21,7 +21,7 @@
 
   const state = {
     domain: 'all',
-    includePlanned: false,
+    status: 'published',
     allExpanded: false
   };
 
@@ -29,7 +29,7 @@
     const facts = [
       { value: published.length, label: 'Published case studies' },
       { value: data.domains.length, label: 'Evidence domains' },
-      { value: data.experience.length, label: 'Experience contexts' },
+      { value: data.experience.length, label: 'Professional contexts' },
       { value: planned.length, label: 'Clearly planned builds' }
     ];
 
@@ -39,6 +39,8 @@
         <span>${escapeHtml(fact.label)}</span>
       </div>
     `).join('');
+    $('[data-status-count="published"]').textContent = published.length;
+    $('[data-status-count="planned"]').textContent = planned.length;
   }
 
   function renderFilters() {
@@ -65,9 +67,21 @@
     });
   }
 
+  function updateFilterCounts() {
+    const projectsForStatus = data.projects.filter((project) => project.status === state.status);
+    $$('.filter-button').forEach((button) => {
+      const domain = button.dataset.domain;
+      const count = domain === 'all'
+        ? projectsForStatus.length
+        : projectsForStatus.filter((project) => project.domains.includes(domain)).length;
+      const countNode = $('.filter-count', button);
+      if (countNode) countNode.textContent = count;
+    });
+  }
+
   function projectCard(project, index) {
     const isPlanned = project.status === 'planned';
-    const statusText = isPlanned ? 'Planned · not completed' : 'Published evidence';
+    const statusText = isPlanned ? 'Planned · upcoming' : 'Completed case study';
     const evidenceLabel = isPlanned ? 'Intended evidence' : 'Evidence artifacts';
     const linkText = isPlanned ? 'View roadmap source' : 'Open GitHub case study';
     const domains = project.domains.map((id) => data.domains.find((domain) => domain.id === id)?.label || id);
@@ -126,7 +140,7 @@
     const cards = $$('.project-card');
     cards.forEach((card) => {
       const domainMatch = state.domain === 'all' || card.dataset.domains.split(' ').includes(state.domain);
-      const statusMatch = card.dataset.status === 'published' || state.includePlanned;
+      const statusMatch = card.dataset.status === state.status;
       card.hidden = !(domainMatch && statusMatch);
       if (card.hidden) $('details', card).open = false;
     });
@@ -135,17 +149,20 @@
     const domainName = state.domain === 'all'
       ? 'all practice areas'
       : data.domains.find((domain) => domain.id === state.domain)?.label || state.domain;
-    $('[data-results-count]').textContent = `${count} ${count === 1 ? 'case study' : 'case studies'} · ${domainName}`;
+    const statusName = state.status === 'published' ? 'completed' : 'planned';
+    $('[data-results-count]').textContent = `${count} ${statusName} ${count === 1 ? 'case study' : 'case studies'} · ${domainName}`;
+    updateFilterCounts();
     state.allExpanded = false;
     $('[data-expand-all]').textContent = 'Expand all visible';
   }
 
   function setupProjectControls() {
-    const plannedToggle = $('[data-planned-toggle]');
-    plannedToggle.addEventListener('click', () => {
-      state.includePlanned = !state.includePlanned;
-      plannedToggle.setAttribute('aria-pressed', String(state.includePlanned));
-      updateProjectVisibility();
+    $$('[data-status-filter]').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.status = button.dataset.statusFilter;
+        $$('[data-status-filter]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        updateProjectVisibility();
+      });
     });
 
     $('[data-expand-all]').addEventListener('click', (event) => {
@@ -175,11 +192,11 @@
     const total = published.length + planned.length;
     const publishedAngle = (published.length / total) * 360;
     $('[data-status-chart]').innerHTML = `
-      <div class="donut" style="--published-angle:${publishedAngle}deg" role="img" aria-label="${published.length} published case studies and ${planned.length} planned projects">
+      <div class="donut" style="--published-angle:${publishedAngle}deg" role="img" aria-label="${published.length} completed case studies and ${planned.length} planned projects">
         <div class="donut-center"><strong>${total}</strong><span>tracked projects</span></div>
       </div>
       <div class="chart-legend" aria-hidden="true">
-        <span><i class="legend-dot legend-published"></i>${published.length} published</span>
+        <span><i class="legend-dot legend-published"></i>${published.length} completed</span>
         <span><i class="legend-dot legend-planned"></i>${planned.length} planned</span>
       </div>
     `;
@@ -194,16 +211,36 @@
               <h3>${escapeHtml(role.title)}</h3>
               <p class="experience-setting">${escapeHtml(role.setting)}</p>
             </div>
-            <p class="experience-summary">${escapeHtml(role.summary)}</p>
+            <div>
+              <p class="experience-summary">${escapeHtml(role.summary)}</p>
+              <div class="experience-tags">${role.signals.map((signal) => `<span>${escapeHtml(signal)}</span>`).join('')}</div>
+            </div>
             <span class="expand-icon" aria-hidden="true"></span>
           </summary>
           <div class="experience-detail">
             <ul>${role.details.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-            <p class="privacy-note"><strong>${escapeHtml(role.label)}</strong><br>${escapeHtml(role.note)}</p>
           </div>
         </details>
       </article>
     `).join('');
+  }
+
+  function renderWorkPrinciples() {
+    $('[data-work-principles]').innerHTML = `
+      <div class="work-principles-heading">
+        <p class="eyebrow">How I work</p>
+        <p>Professional habits carried across security, service delivery, and technical support.</p>
+      </div>
+      <div class="work-principles-grid">
+        ${data.workPrinciples.map((principle, index) => `
+          <article>
+            <span>${String(index + 1).padStart(2, '0')}</span>
+            <h3>${escapeHtml(principle.title)}</h3>
+            <p>${escapeHtml(principle.text)}</p>
+          </article>
+        `).join('')}
+      </div>
+    `;
   }
 
   function renderSkills() {
@@ -228,9 +265,9 @@
       const project = projectById.get(link.dataset.skillProject);
       if (!project) return;
       state.domain = 'all';
-      if (project.status === 'planned') state.includePlanned = true;
+      state.status = project.status;
       $$('.filter-button').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.domain === 'all')));
-      $('[data-planned-toggle]').setAttribute('aria-pressed', String(state.includePlanned));
+      $$('[data-status-filter]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.statusFilter === state.status)));
       updateProjectVisibility();
       const card = $(`#project-${CSS.escape(project.id)}`);
       $('details', card).open = true;
@@ -250,9 +287,9 @@
     $('[data-planned-grid]').addEventListener('click', (event) => {
       const link = event.target.closest('[data-show-planned]');
       if (!link) return;
-      state.includePlanned = true;
+      state.status = 'planned';
       state.domain = 'all';
-      $('[data-planned-toggle]').setAttribute('aria-pressed', 'true');
+      $$('[data-status-filter]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.statusFilter === 'planned')));
       $$('.filter-button').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.domain === 'all')));
       updateProjectVisibility();
       const card = $(`#project-${CSS.escape(link.dataset.showPlanned)}`);
@@ -351,6 +388,7 @@
   renderDomainChart();
   renderStatusChart();
   renderExperience();
+  renderWorkPrinciples();
   renderSkills();
   renderPlanned();
   setupProjectControls();
