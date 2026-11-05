@@ -609,14 +609,16 @@ html[data-theme="light"] .theme-icon-moon { opacity: 1; transform: scale(1) rota
   .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg); }
   .primary-nav {
     position: fixed;
-    z-index: 99;
+    z-index: 120;
     top: var(--header-h);
     right: 15px;
     left: 15px;
     display: grid;
     gap: 2px;
     padding: 10px;
+    border-color: var(--line-strong);
     border-radius: 18px;
+    background: var(--surface);
     box-shadow: var(--shadow);
     opacity: 0;
     pointer-events: none;
