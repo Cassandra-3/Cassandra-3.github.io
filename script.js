@@ -401,6 +401,79 @@
     });
   }
 
+  function setupUntangle() {
+    const board = $('[data-untangle-board]');
+    const button = $('[data-untangle-button]');
+    if (!board || !button) return;
+
+    const label = $('[data-untangle-label]', button);
+    const status = $('[data-untangle-status]', board);
+    button.addEventListener('click', () => {
+      const untangled = board.classList.toggle('is-untangled');
+      button.setAttribute('aria-pressed', String(untangled));
+      label.textContent = untangled ? 'Tangle it again' : 'Untangle the problem';
+      status.textContent = untangled
+        ? 'A clear path appears: listen, clarify, investigate, document and follow through.'
+        : 'Click the button to find the path.';
+    });
+  }
+
+  function setupProblemExplorer() {
+    const answer = $('[data-problem-answer]');
+    const buttons = $$('[data-problem]');
+    if (!answer || !buttons.length) return;
+
+    const scenarios = {
+      user: {
+        title: 'Make the person feel heard.',
+        body: 'I confirm what changed, separate symptoms from assumptions and guide one clear step at a time.',
+        output: 'A calmer user, cleaner notes and a useful escalation if the issue continues.',
+        href: '#experience',
+        link: 'See the experience behind this →'
+      },
+      evidence: {
+        title: 'Find the gap before chasing the file.',
+        body: 'I connect the requirement to available evidence, identify the owner and flag exactly what is missing or awaiting approval.',
+        output: 'A focused gap list, clear ownership and follow-up that a reviewer can act on.',
+        href: '#experience',
+        link: 'See the GRC experience behind this →'
+      },
+      signal: {
+        title: 'Separate the clue from the conclusion.',
+        body: 'I check the source, surrounding context, corroborating evidence and the limits of what the signal can actually prove.',
+        output: 'A qualified finding, documented reasoning and a sensible next investigation step.',
+        href: '#projects',
+        link: 'See the project evidence behind this →'
+      }
+    };
+
+    buttons.forEach((button) => button.addEventListener('click', () => {
+      const scenario = scenarios[button.dataset.problem];
+      if (!scenario) return;
+      buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      answer.classList.remove('is-changing');
+      void answer.offsetWidth;
+      answer.classList.add('is-changing');
+      $('[data-answer-title]', answer).textContent = scenario.title;
+      $('[data-answer-body]', answer).textContent = scenario.body;
+      $('[data-answer-output]', answer).textContent = scenario.output;
+      const link = $('[data-answer-link]', answer);
+      link.href = scenario.href;
+      link.textContent = scenario.link;
+    }));
+  }
+
+  function setupStoryChapters() {
+    const chapters = $$('[data-story]');
+    chapters.forEach((chapter) => chapter.addEventListener('click', () => {
+      chapters.forEach((item) => {
+        const active = item === chapter;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+    }));
+  }
+
   renderFacts();
   renderFilters();
   renderProjects();
@@ -414,5 +487,8 @@
   setupProjectControls();
   setupTheme();
   setupNavigation();
+  setupUntangle();
+  setupProblemExplorer();
+  setupStoryChapters();
   setupReveals();
 })();
