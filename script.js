@@ -27,7 +27,7 @@
 
   function renderFacts() {
     const facts = [
-      { value: published.length, label: 'Published case studies' },
+      { value: published.length, label: 'Published projects' },
       { value: data.domains.length, label: 'Evidence domains' },
       { value: data.experience.length, label: 'Professional contexts' },
       { value: planned.length, label: 'Clearly planned builds' }
@@ -81,9 +81,9 @@
 
   function projectCard(project, index) {
     const isPlanned = project.status === 'planned';
-    const statusText = isPlanned ? 'Planned · upcoming' : 'Completed case study';
+    const statusText = isPlanned ? 'Planned · upcoming' : 'Completed project';
     const evidenceLabel = isPlanned ? 'Intended evidence' : 'Evidence artifacts';
-    const linkText = isPlanned ? 'View roadmap source' : 'Open GitHub case study';
+    const linkText = isPlanned ? 'View roadmap source' : 'Open GitHub project';
     const domains = project.domains.map((id) => data.domains.find((domain) => domain.id === id)?.label || id);
 
     return `
@@ -150,7 +150,7 @@
       ? 'all practice areas'
       : data.domains.find((domain) => domain.id === state.domain)?.label || state.domain;
     const statusName = state.status === 'published' ? 'completed' : 'planned';
-    $('[data-results-count]').textContent = `${count} ${statusName} ${count === 1 ? 'case study' : 'case studies'} · ${domainName}`;
+    $('[data-results-count]').textContent = `${count} ${statusName} ${count === 1 ? 'project' : 'projects'} · ${domainName}`;
     updateFilterCounts();
     state.allExpanded = false;
     $('[data-expand-all]').textContent = 'Expand all visible';
@@ -180,7 +180,7 @@
     const max = Math.max(...counts.map((item) => item.count));
     const chart = $('[data-domain-chart]');
     chart.innerHTML = counts.map((item) => `
-      <div class="bar-row" aria-label="${escapeHtml(item.label)}: ${item.count} published ${item.count === 1 ? 'case study' : 'case studies'}">
+      <div class="bar-row" aria-label="${escapeHtml(item.label)}: ${item.count} published ${item.count === 1 ? 'project' : 'projects'}">
         <span class="bar-label">${escapeHtml(item.label)}</span>
         <span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--bar-width:${(item.count / max) * 100}%"></span></span>
         <span class="bar-value">${item.count}</span>
@@ -192,7 +192,7 @@
     const total = published.length + planned.length;
     const publishedAngle = (published.length / total) * 360;
     $('[data-status-chart]').innerHTML = `
-      <div class="donut" style="--published-angle:${publishedAngle}deg" role="img" aria-label="${published.length} completed case studies and ${planned.length} planned projects">
+      <div class="donut" style="--published-angle:${publishedAngle}deg" role="img" aria-label="${published.length} completed projects and ${planned.length} planned projects">
         <div class="donut-center"><strong>${total}</strong><span>tracked projects</span></div>
       </div>
       <div class="chart-legend" aria-hidden="true">
@@ -279,7 +279,7 @@
       <blockquote class="personality-quote">
         <span aria-hidden="true">“</span>
         <p>${escapeHtml(data.personality.statement)}</p>
-        <footer>— Cassandra</footer>
+        <footer>Cassandra</footer>
       </blockquote>
       <div class="personality-grid">
         ${data.personality.traits.map((trait, index) => `
@@ -412,9 +412,7 @@
       const untangled = board.classList.toggle('is-untangled');
       button.setAttribute('aria-pressed', String(untangled));
       label.textContent = untangled ? 'Tangle it again' : 'Untangle the problem';
-      status.textContent = untangled
-        ? 'A clear path appears: listen, clarify, investigate, document and follow through.'
-        : 'Click the button to find the path.';
+      if (status) status.textContent = untangled ? 'Problem untangled.' : '';
     });
   }
 
@@ -442,8 +440,8 @@
         title: 'Separate the clue from the conclusion.',
         body: 'I check the source, surrounding context, corroborating evidence and the limits of what the signal can actually prove.',
         output: 'A qualified finding, documented reasoning and a sensible next investigation step.',
-        href: '#projects',
-        link: 'See the project evidence behind this →'
+        href: '#project-sensor-design',
+        link: 'Open the Security Monitoring Sensor Design project →'
       }
     };
 
