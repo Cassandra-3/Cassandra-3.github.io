@@ -841,7 +841,9 @@ html[data-theme="light"] .problem-section {
 .problem-copy h2 { margin: 10px 0 16px; font-size: clamp(3.3rem, 6vw, 6.5rem); line-height: .9; letter-spacing: -.065em; }
 .problem-copy > p:not(.eyebrow) { max-width: 480px; color: var(--muted-strong); }
 .problem-options { display: grid; gap: 9px; margin-top: 38px; }
-.problem-options button { padding: 15px 17px; display: flex; gap: 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: color-mix(in srgb, var(--surface) 62%, transparent); color: inherit; text-align: left; cursor: pointer; transition: background .2s, color .2s, transform .2s; }
+.problem-options button { padding: 15px 17px; display: flex; gap: 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface); color: var(--ink); text-align: left; cursor: pointer; transition: background .2s, color .2s, transform .2s; }
+html[data-theme="dark"] .problem-options button:not([aria-pressed="true"]) { background: #192235; color: #f4f6fb; }
+html[data-theme="light"] .problem-options button:not([aria-pressed="true"]) { background: #ffffff; color: #141927; }
 .problem-options button:hover { transform: translateX(4px); }
 .problem-options button[aria-pressed="true"] { background: var(--coral); border-color: var(--coral); color: #10131d; font-weight: 800; }
 .problem-options span { font: 700 .7rem var(--mono); opacity: .65; }
