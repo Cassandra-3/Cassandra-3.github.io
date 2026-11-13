@@ -45,7 +45,7 @@
 
   function renderFilters() {
     const container = $('[data-filters]');
-    const options = [{ id: 'all', label: 'All evidence' }, ...data.domains];
+    const options = [{ id: 'all', label: 'All projects' }, ...data.domains];
 
     container.innerHTML = options.map((option) => {
       const count = option.id === 'all'
@@ -99,7 +99,7 @@
             <p class="project-summary">${escapeHtml(project.summary)}</p>
             <div class="card-bottom">
               <span class="type-label">${escapeHtml(project.type)} · ${escapeHtml(project.completed)}</span>
-              <span class="expand-icon" aria-hidden="true"></span>
+              <span class="expand-control" aria-hidden="true"><span class="expand-label expand-label-closed">View details</span><span class="expand-label expand-label-open">Close details</span><span class="expand-icon"></span></span>
             </div>
           </summary>
           <div class="project-detail">
@@ -491,3 +491,4 @@
   setupStoryChapters();
   setupReveals();
 })();
+
