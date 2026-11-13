@@ -170,6 +170,21 @@ window.PORTFOLIO_DATA = {
       accent: "amber"
     },
     {
+      id: "ai-leaked-document",
+      title: "The Leaked Document — AI Authorization & Governance",
+      status: "planned",
+      phase: "in-progress",
+      type: "Individual portfolio project · in progress",
+      completed: "Started November 2026",
+      summary: "An in-progress Python proof of concept exploring how an internal AI assistant should restrict access to synthetic company documents based on employee roles.",
+      scope: "Early local prototype using fictional roles and documents. Not a production AI deployment, independently validated security control, or completed prompt-injection assessment.",
+      contribution: "Cassandra is building a small permission-aware document retrieval example and investigating how authorization decisions affect potential information leakage. Controlled leakage and prompt-injection test cases are planned next.",
+      evidence: ["Early Python prototype in progress", "Fictional roles and documents", "Role-aware retrieval exploration", "Next: leakage test cases", "Next: prompt-injection testing and published findings"],
+      tools: ["Python", "Role-based authorization", "AI security", "Document access control", "GRC"],
+      domains: ["grc", "automation"],
+      accent: "violet"
+    },
+    {
       id: "log-monitoring-v2",
       title: "Log Monitoring & Alert Automation: Version 2",
       status: "planned",
