@@ -30,7 +30,7 @@
       { value: published.length, label: 'Published projects' },
       { value: data.domains.length, label: 'Evidence domains' },
       { value: data.experience.length, label: 'Professional contexts' },
-      { value: planned.length, label: 'Clearly planned builds' }
+      { value: planned.length, label: 'In progress / planned builds' }
     ];
 
     $('#fact-strip').innerHTML = facts.map((fact) => `
@@ -81,9 +81,10 @@
 
   function projectCard(project, index) {
     const isPlanned = project.status === 'planned';
-    const statusText = isPlanned ? 'Planned · upcoming' : 'Completed project';
-    const evidenceLabel = isPlanned ? 'Intended evidence' : 'Evidence artifacts';
+    const statusText = isPlanned ? (project.phase === 'in-progress' ? 'In progress · prototype' : 'Planned · upcoming') : 'Completed project';
+    const evidenceLabel = isPlanned ? (project.phase === 'in-progress' ? 'Current work & next steps' : 'Intended evidence') : 'Evidence artifacts';
     const linkText = isPlanned ? 'View roadmap source' : 'Open GitHub project';
+    const projectLink = project.github ? `<a class="case-link" href="${escapeHtml(project.github)}" target="_blank" rel="noreferrer">${escapeHtml(linkText)} ${externalLabel}</a>` : '';
     const domains = project.domains.map((id) => data.domains.find((domain) => domain.id === id)?.label || id);
 
     return `
@@ -120,7 +121,7 @@
               <ul class="tag-list">${domains.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
             </div>
             <div class="detail-block scope-note"><strong>Scope boundary:</strong> ${escapeHtml(project.scope)}</div>
-            <a class="case-link" href="${escapeHtml(project.github)}" target="_blank" rel="noreferrer">${escapeHtml(linkText)} ${externalLabel}</a>
+            ${projectLink}
           </div>
         </details>
       </article>
@@ -149,7 +150,7 @@
     const domainName = state.domain === 'all'
       ? 'all practice areas'
       : data.domains.find((domain) => domain.id === state.domain)?.label || state.domain;
-    const statusName = state.status === 'published' ? 'completed' : 'planned';
+    const statusName = state.status === 'published' ? 'completed' : 'in-progress or planned';
     $('[data-results-count]').textContent = `${count} ${statusName} ${count === 1 ? 'project' : 'projects'} · ${domainName}`;
     updateFilterCounts();
     state.allExpanded = false;
@@ -192,12 +193,12 @@
     const total = published.length + planned.length;
     const publishedAngle = (published.length / total) * 360;
     $('[data-status-chart]').innerHTML = `
-      <div class="donut" style="--published-angle:${publishedAngle}deg" role="img" aria-label="${published.length} completed projects and ${planned.length} planned projects">
+      <div class="donut" style="--published-angle:${publishedAngle}deg" role="img" aria-label="${published.length} completed projects and ${planned.length} in-progress or planned projects">
         <div class="donut-center"><strong>${total}</strong><span>tracked projects</span></div>
       </div>
       <div class="chart-legend" aria-hidden="true">
         <span><i class="legend-dot legend-published"></i>${published.length} completed</span>
-        <span><i class="legend-dot legend-planned"></i>${planned.length} planned</span>
+        <span><i class="legend-dot legend-planned"></i>${planned.length} in progress / planned</span>
       </div>
     `;
   }
@@ -296,10 +297,10 @@
   function renderPlanned() {
     $('[data-planned-grid]').innerHTML = planned.map((project, index) => `
       <article class="planned-card reveal">
-        <span class="planned-step">Roadmap ${String(index + 1).padStart(2, '0')} · not completed</span>
+        <span class="planned-step">${project.phase === 'in-progress' ? 'Active prototype · not completed' : `Roadmap ${String(index + 1).padStart(2, '0')} · not completed`}</span>
         <h3>${escapeHtml(project.title)}</h3>
         <p>${escapeHtml(project.summary)}</p>
-        <a href="#project-${escapeHtml(project.id)}" data-show-planned="${escapeHtml(project.id)}">Inspect the planned scope →</a>
+        <a href="#project-${escapeHtml(project.id)}" data-show-planned="${escapeHtml(project.id)}">Inspect project scope →</a>
       </article>
     `).join('');
 
